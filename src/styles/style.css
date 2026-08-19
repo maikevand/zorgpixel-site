@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
 /*////////////////////////
     Table of Contents
     1. Global Styles
@@ -24,8 +26,23 @@ img {
   padding: 0;
 }
 
-/* ------------------------------- 2. Typography ----------------------------------- */
+:root {
+  --primary: #0a2f66;
+  --secundary: #145ece;
+}
 
+/* ------------------------------- 2. Typography ----------------------------------- */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+nav,
+button {
+  font-family: "Fredoka", sans-serif;
+}
 /* ------------------------------- 3. Layout --------------------------------------- */
 
 /* --------------- 3.1 Reusables ----------------------- */
@@ -35,6 +52,63 @@ img {
 /* ------------------------------- 4. Areas ---------------------------------------- */
 
 /* --------------- 4.1 Header ------------------------- */
+.navigation-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+
+  padding: 0 1rem;
+
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.header-logo {
+  height: 90px;
+  width: auto;
+}
+
+header nav a {
+  color: var(--primary);
+  text-decoration: transparent;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2rem;
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-links a:hover {
+  opacity: 0.7;
+}
+
+.nav-links a.active {
+  color: var(--secundary);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.35rem;
+}
+
+.nav-button {
+  background-color: var(--secundary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  margin-right: 1.5rem;
+  border-radius: 10px;
+}
+
+.nav-button:hover {
+  opacity: 0.9;
+}
 
 /* --------------- 4.2 Introduction ------------------- */
 
