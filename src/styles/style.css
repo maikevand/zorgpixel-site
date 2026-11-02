@@ -10,6 +10,7 @@
     4. Areas
         4.1 Header
         4.2 Introduction
+        4.3 Background
         etc.
     5. Media Queries
 ////////////////////////*/
@@ -202,7 +203,7 @@ main > p {
   justify-content: center;
   gap: 0.95rem;
   flex: 1 1 24rem;
-  min-width: 0;
+  min-width: 45rem;
   max-width: 38rem;
 }
 
@@ -240,6 +241,60 @@ main > p {
   height: 100%;
   object-fit: cover;
   object-position: center center;
+}
+
+/* --------------- 4.3 Background -------------------- */
+.background-section {
+  --hero-gap: clamp(2rem, 4vw, 4.5rem);
+  padding:
+    clamp(2.25rem, 5vh, 3.5rem)
+    max(0px, calc((100% - 476px - 38rem - var(--hero-gap)) / 2))
+    clamp(3rem, 8vh, 5rem)
+    max(var(--gutter), calc((100% - 476px - 38rem - var(--hero-gap)) / 2));
+  background: linear-gradient(
+    180deg,
+    var(--paper) 0,
+    color-mix(in srgb, #7be1ce 16%, #eef4f8) 3.25rem
+  );
+}
+
+.background-layout {
+  display: grid;
+  grid-template-columns: 45rem 476px;
+  gap: var(--hero-gap);
+  align-items: start;
+  justify-content: start;
+}
+
+.background-lead,
+.background-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.background-lead h2 {
+  max-width: 13em;
+  padding-bottom: 0.15rem;
+}
+
+.background-lead h2::after {
+  content: "";
+  display: block;
+  width: 2.75rem;
+  height: 4px;
+  margin-top: 0.95rem;
+  border-radius: 999px;
+  background: #7be1ce;
+}
+
+.background-statement {
+  margin-top: 0.45rem;
+  font-family: "Fredoka", sans-serif;
+  font-size: 1.28rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--secondary);
 }
 
 /* ------------------------------- 5. Media Queries -------------------------------- */
@@ -293,6 +348,17 @@ main > p {
     clip-path: none;
     border-bottom-left-radius: 4.5rem;
     filter: none;
+  }
+
+  .background-section {
+    padding: 1.75rem var(--gutter) 2.75rem;
+  }
+
+  .background-layout {
+    grid-template-columns: 1fr;
+    gap: 1.15rem;
+    width: 100%;
+    max-width: 38rem;
   }
 }
 
