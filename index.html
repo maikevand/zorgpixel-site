@@ -7,15 +7,22 @@
     <title>Zorgpixel</title>
 </head>
 <body>
+<svg class="hero-clip" width="0" height="0" aria-hidden="true">
+    <defs>
+        <clipPath id="hero-clip" clipPathUnits="objectBoundingBox">
+            <path d="M0.5714 0 H1 V1 H0.1702 C0.0546 1 0 0.8756 0.0315 0.7127 C0.063 0.5475 0.1618 0.4231 0.2584 0.3167 C0.3655 0.2014 0.4727 0.1063 0.5714 0 Z"/>
+        </clipPath>
+    </defs>
+</svg>
 <header>
     <nav class="navigation-section">
         <img class="header-logo" src="src/assets/logo-with-name.png" alt="Logo Zorgpixel"/>
         <div class="nav-links">
-            <a href="/" class="active">Home</a>
+            <!-- <a href="/" class="active">Home</a>
             <a href="/method.html">Werkwijze</a>
-            <a href="/about.html">Over Zorgpixel</a>
+            <a href="/about.html">Over Zorgpixel</a> -->
         </div>
-        <a href="/contact.html" class="nav-button">Kennismaken</a>
+        <!-- <a href="/contact.html" class="nav-button">Contact</a> -->
     </nav>
 </header>
 
@@ -25,6 +32,12 @@
             <h1>Websites en digitale oplossingen <span class="highlight">met zorg gemaakt.</span></h1>
             <p>Jij zorgt voor je cliënten. Ik zorg voor jouw website of zorgtoepassing.</p>
             <p>Ik help kleinschalige (zorg)praktijken aan een website of praktische digitale oplossingen.</p>
+            <div class="contact-cta">
+                <p>Benieuwd wat ik voor jouw praktijk kan betekenen?</p>
+                <a href="mailto:zorgpixel@info.nl" class="contact-button">
+                    Kennismaken? Mail me ↗
+                </a>
+            </div>
         </div>
         <div class="hero-shape">
             <img src="./src/assets/interior.png" alt="Interieur">

@@ -53,14 +53,14 @@ button {
 }
 
 h1 {
-  font-size: clamp(2.25rem, 3vw, 2.8rem);
+  font-size: clamp(1.85rem, 1.15rem + 2vw, 2.8rem);
   font-weight: 600;
   line-height: 1.16;
   letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: clamp(1.75rem, 2.4vw, 2.15rem);
+  font-size: clamp(1.55rem, 1rem + 1.5vw, 2.15rem);
   font-weight: 600;
   line-height: 1.25;
 }
@@ -188,13 +188,17 @@ main > p {
 }
 
 .intro-section {
-  /* Keeps the text column and the 476px photo together as one pair. */
-  --hero-gap: clamp(2rem, 4vw, 4.5rem);
+  --hero-gap: clamp(1.5rem, 3vw, 4rem);
+  --text-max: 40rem;
+  --hero-w: min(476px, 34vw, calc((100dvh - 23rem) * 476 / 442));
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: var(--hero-gap);
-  padding: clamp(1.75rem, 9vh, 5.5rem) max(0px, calc((100% - 476px - 38rem - var(--hero-gap)) / 2)) clamp(2rem, 9vh, 5.5rem) max(var(--gutter), calc((100% - 476px - 38rem - var(--hero-gap)) / 2));
+  width: 100%;
+  padding:
+    clamp(1.75rem, 9vh, 5.5rem)
+    max(var(--gutter), calc((100% - var(--text-max) - var(--hero-w) - var(--hero-gap)) / 2));
 }
 
 .intro-text {
@@ -202,9 +206,9 @@ main > p {
   flex-direction: column;
   justify-content: center;
   gap: 0.95rem;
-  flex: 1 1 24rem;
-  min-width: 45rem;
-  max-width: 38rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: var(--text-max);
 }
 
 .intro-text p:first-of-type {
@@ -225,15 +229,22 @@ main > p {
   color: var(--primary);
 }
 
+.hero-clip {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
 .hero-shape {
-  width: 476px;
-  height: 442px;
+  width: var(--hero-w);
+  height: auto;
+  aspect-ratio: 476 / 442;
   overflow: hidden;
   background: #eef2ef;
   flex-shrink: 0;
   filter: drop-shadow(-10px 14px 22px rgba(10, 47, 102, 0.07));
 
-  clip-path: path("M272 0 H476 V442 H81 C26 442 0 387 15 315 C30 242 77 187 123 140 C174 89 225 47 272 0 Z");
+  clip-path: url("#hero-clip");
 }
 
 .hero-shape img {
@@ -243,14 +254,50 @@ main > p {
   object-position: center center;
 }
 
+.contact-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: clamp(1.25rem, 4vh, 2rem);
+}
+
+.contact-cta p {
+  font-weight: 500;
+}
+
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background: var(--secondary);
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.contact-button:hover {
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+.contact-button:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
 /* --------------- 4.3 Background -------------------- */
 .background-section {
-  --hero-gap: clamp(2rem, 4vw, 4.5rem);
+  --hero-gap: clamp(1.5rem, 3vw, 4rem);
+  --text-max: 40rem;
+  --hero-w: min(476px, 34vw, calc((100dvh - 23rem) * 476 / 442));
   padding:
     clamp(2.25rem, 5vh, 3.5rem)
-    max(0px, calc((100% - 476px - 38rem - var(--hero-gap)) / 2))
-    clamp(3rem, 8vh, 5rem)
-    max(var(--gutter), calc((100% - 476px - 38rem - var(--hero-gap)) / 2));
+    max(var(--gutter), calc((100% - var(--text-max) - var(--hero-w) - var(--hero-gap)) / 2));
   background: linear-gradient(
     180deg,
     var(--paper) 0,
@@ -260,10 +307,11 @@ main > p {
 
 .background-layout {
   display: grid;
-  grid-template-columns: 45rem 476px;
+  grid-template-columns: minmax(0, 1fr) var(--hero-w);
   gap: var(--hero-gap);
   align-items: start;
   justify-content: start;
+  width: 100%;
 }
 
 .background-lead,
@@ -271,6 +319,7 @@ main > p {
   display: flex;
   flex-direction: column;
   gap: 0.95rem;
+  min-width: 0;
 }
 
 .background-lead h2 {
@@ -295,6 +344,40 @@ main > p {
   font-weight: 500;
   line-height: 1.35;
   color: var(--secondary);
+}
+
+/* --------------- 4.4 Desktop viewport --------------- */
+@media (min-width: 961px) {
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .intro-section {
+    flex: 0 0 auto;
+    align-items: flex-start;
+    padding-top: clamp(0.85rem, 1.8vh, 1.35rem);
+    padding-bottom: clamp(0.45rem, 1vh, 0.85rem);
+  }
+
+  .contact-cta {
+    margin-top: clamp(1.5rem, 4.5vh, 5rem);
+  }
+
+  .background-section {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    padding-top: clamp(1rem, 2vh, 1.6rem);
+    padding-bottom: clamp(1rem, 2.2vh, 1.75rem);
+  }
 }
 
 /* ------------------------------- 5. Media Queries -------------------------------- */
@@ -336,17 +419,20 @@ main > p {
   .intro-text {
     margin-left: 0;
     width: 100%;
-    max-width: 38rem;
+    min-width: 0;
+    max-width: 40rem;
     padding-right: 0;
   }
 
   .hero-shape {
     width: calc(100% + var(--gutter));
-    height: 230px;
+    max-width: none;
+    height: clamp(200px, 36vw, 300px);
+    aspect-ratio: auto;
     margin-right: calc(var(--gutter) * -1);
     align-self: flex-end;
     clip-path: none;
-    border-bottom-left-radius: 4.5rem;
+    border-bottom-left-radius: clamp(2.5rem, 8vw, 4.5rem);
     filter: none;
   }
 
@@ -358,17 +444,19 @@ main > p {
     grid-template-columns: 1fr;
     gap: 1.15rem;
     width: 100%;
-    max-width: 38rem;
+    max-width: 40rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .nav-links a,
-  .nav-button {
+  .nav-button,
+  .contact-button {
     transition: none;
   }
 
-  .nav-button:hover {
+  .nav-button:hover,
+  .contact-button:hover {
     transform: none;
   }
 }
